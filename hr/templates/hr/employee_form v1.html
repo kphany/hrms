@@ -1,0 +1,35 @@
+<!--hr/templates/hr/employee_form.html-->
+
+{% extends "hr/base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Employee List</h2>
+    <a href="{% url 'employee_create' %}" class="btn btn-primary">Add Employee</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.first_name }} {{ employee.last_name }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.department.name }}</td>
+                <td>
+                    <a href="{% url 'employee_detail' employee.pk %}" class="btn btn-info">View</a>
+                    <a href="{% url 'employee_edit' employee.pk %}" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

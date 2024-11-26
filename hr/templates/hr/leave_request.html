@@ -1,0 +1,18 @@
+<!-- hr/templates/hr/leave_request.html -->
+
+{% extends 'hr/base.html' %}  <!-- Extend the base template -->
+{% load static %}  <!-- Load static template tag library -->
+
+{% block title %}Leave Request{% endblock %}  <!-- Set the title for this page -->
+
+{% block content %}
+    <h1>Leave Request</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit Leave Request</button>  <!-- Styled button -->
+    </form>
+    <div class="mt-3">
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>  <!-- Styled button -->
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+/* footer.css */
+/* Footer styles */
+
+.footer {
+    background-color: #f8f9fa;
+    text-align: center;
+    width: 100%;
+    padding: 20px 0; /* Add padding for space around text */
+    position: relative;
+    bottom: 0;
+    margin-top: 20px; /* Prevent overlap with content */
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+    color: #6c757d; /* Light grey text color */
+    font-size: 14px; /* Adjust font size */
+}
+
+.footer a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+.footer a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Sticky footer layout */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    flex-grow: 1; /* Allow content area to expand */
+}
+
+/* Mobile responsive footer */
+@media (max-width: 768px) {
+    .footer {
+        font-size: 12px; /* Smaller font on mobile */
+        padding: 15px 0; /* Adjust padding for smaller screens */
+    }
+}

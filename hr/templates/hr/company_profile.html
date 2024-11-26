@@ -1,0 +1,18 @@
+<!-- hr/templates/hr/company_profile.html -->
+
+{% extends "hr/base.html" %}
+
+{% block content %}
+    <h1>{{ company.name }}</h1>
+    <p><strong>Address:</strong> {{ company.address }}</p>
+    <p><strong>City:</strong> {{ company.city }}</p>
+    <p><strong>State:</strong> {{ company.state }}</p>
+    <p><strong>Country:</strong> {{ company.country }}</p>
+    <p><strong>Postal Code:</strong> {{ company.postal_code }}</p>
+    <p><strong>Phone:</strong> {{ company.phone }}</p>
+    <p><strong>Email:</strong> <a href="mailto:{{ company.email }}">{{ company.email }}</a></p>
+    <p><strong>Website:</strong> <a href="{{ company.website }}">{{ company.website }}</a></p>
+    <p><strong>Established:</strong> {{ company.established_date }}</p>
+    <p><strong>Description:</strong> {{ company.description }}</p>
+{% endblock %}
+

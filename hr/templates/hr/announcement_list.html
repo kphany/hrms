@@ -1,0 +1,23 @@
+<!-- hr/templates/hr/announcement_list.html -->
+
+{% extends 'hr/base.html' %}  <!-- Extend the base template -->
+{% load static %}  <!-- Load static template tag library -->
+
+{% block title %}Announcements{% endblock %}  <!-- Set the title for this page -->
+
+{% block content %}
+    <h1>Announcements</h1>
+    <ul class="list-group">
+        {% for announcement in announcements %}
+            <li class="list-group-item">
+                {{ announcement.title }} - <small>{{ announcement.created_at }}</small>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No announcements available.</li>
+        {% endfor %}
+    </ul>
+    <div class="mt-3">
+        <a href="{% url 'create_announcement' %}" class="btn btn-primary">Create Announcement</a>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+{% endblock %}

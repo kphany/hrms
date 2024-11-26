@@ -1,0 +1,96 @@
+<!-- hr/templates/hr/base.html -->
+
+{% load static %} <!-- Load the static template tag library -->
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Load Font Awesome -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="http://127.0.0.1:8000/static/css/sidebar.css"> <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+    <title>{% block title %}HR Management System{% endblock %}</title>
+</head>
+<body>
+
+    <!-- Navbar (Submenu) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'dashboard' %}">HRMS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    {% if request.resolver_match.url_name in 'employee_list employee_create' %}
+                        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'employee_list' %}active{% endif %}" href="{% url 'employee_list' %}">Employee List</a></li>
+                        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'employee_create' %}active{% endif %}" href="{% url 'employee_create' %}">Add New Employee</a></li>
+                    {% elif request.resolver_match.url_name in 'attendance_list attendance_report' %}
+                        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'attendance_list' %}active{% endif %}" href="{% url 'attendance_list' %}">Attendance Records</a></li>
+                        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'attendance_report' %}active{% endif %}" href="{% url 'attendance_report' %}">Generate Report</a></li>
+                    {% elif request.resolver_match.url_name in 'leave_tracker leave_report' %}
+                        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'leave_tracker' %}active{% endif %}" href="{% url 'leave_tracker' %}">Leave Requests</a></li>
+                        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'leave_report' %}active{% endif %}" href="{% url 'leave_report' %}">Leave Report</a></li>
+                    {% elif request.resolver_match.url_name == 'settings' %}
+                        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'settings' %}active{% endif %}" href="{% url 'settings' %}">Company Profile</a></li>
+                        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'manage_departments' %}active{% endif %}" href="{% url 'manage_departments' %}">Manage Departments</a></li>
+                        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'general_settings' %}active{% endif %}" href="{% url 'general_settings' %}">Other Settings</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+  
+    <!-- Wrapper for Sidebar and Content -->
+    <div class="wrapper">
+        <!-- Sidebar (Main Menu) -->
+        <div class="sidebar">
+            <a class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a class="{% if request.resolver_match.url_name in 'employee_list employee_create' %}active{% endif %}" href="{% url 'employee_list' %}"><i class="fas fa-users"></i> Employees</a>
+            <a class="{% if request.resolver_match.url_name in 'attendance_list attendance_report' %}active{% endif %}" href="{% url 'attendance_list' %}"><i class="fas fa-calendar-check"></i> Attendance</a>
+            <a class="{% if request.resolver_match.url_name in 'leave_tracker leave_report' %}active{% endif %}" href="{% url 'leave_tracker' %}"><i class="fas fa-plane-slash"></i> Leave Tracker</a>
+            <a class="{% if request.resolver_match.url_name in 'settings manage_departments general_settings' %}active{% endif %}" href="{% url 'settings' %}"><i class="fas fa-cog"></i> Settings</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="container mt-4">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-5 py-3">
+        <div class="container">
+            <span class="text-muted">© {{ current_year }} HR Management System</span>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // JavaScript for toggling submenu
+        document.addEventListener('DOMContentLoaded', function () {
+            const settingsLink = document.getElementById('settingsDropdown');
+            const settingsSubmenu = document.getElementById('settingsSubmenu');
+
+            settingsLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                settingsSubmenu.classList.toggle('show');
+            });
+        });
+    </script>
+</body>
+</html>

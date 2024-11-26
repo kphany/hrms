@@ -1,0 +1,81 @@
+<!-- hr/templates/hr/employee_list.html -->
+
+{% extends "hr/base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Employee List</h2>
+    <a href="{% url 'employee_create' %}" class="btn btn-primary">Add Employee</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.first_name }} {{ employee.last_name }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.department.name }}</td>
+                <td>
+                    <a href="{% url 'employee_detail' employee.pk %}" class="btn btn-info">View</a>
+                    <a href="{% url 'employee_edit' employee.pk %}" class="btn btn-warning">Edit</a>
+                    <!-- Delete button triggers modal -->
+                    <form action="{% url 'employee_delete' employee.id %}" method="post" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this employee?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>                   
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong id="employeeName"></strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <form id="deleteForm" method="POST" action="">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to handle the modal data
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var employeeId = button.data('id'); // Extract info from data-* attributes
+        var employeeName = button.data('name');
+
+        var modal = $(this);
+        modal.find('#employeeName').text(employeeName); // Set employee name in modal
+
+        // Set the form action to delete the employee
+        var form = modal.find('#deleteForm');
+        form.attr('action', '{% url "employee_delete" 0 %}'.replace('0', employeeId)); // Adjust to your delete URL pattern
+    });
+</script>
+
+{% endblock %}

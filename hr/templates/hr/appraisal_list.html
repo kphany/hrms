@@ -1,0 +1,21 @@
+<h1>Appraisal List</h1>
+<a href="{% url 'appraisal_create' %}">Add Appraisal</a>
+<table>
+    <tr>
+        <th>Employee</th>
+        <th>Score</th>
+        <th>Review Date</th>
+        <th>Actions</th>
+    </tr>
+    {% for appraisal in appraisals %}
+    <tr>
+        <td>{{ appraisal.employee.user.username }}</td>
+        <td>{{ appraisal.score }}</td>
+        <td>{{ appraisal.review_date }}</td>
+        <td>
+            <a href="{% url 'appraisal_edit' appraisal.pk %}">Edit</a>
+            <a href="{% url 'appraisal_delete' appraisal.pk %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,9 @@
+/* navbar.css */
+.navbar {
+    margin-bottom: 20px; /* Example margin for navbar */
+}
+
+.navbar brand{
+    color: white;
+}
+

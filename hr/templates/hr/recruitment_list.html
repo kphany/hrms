@@ -1,0 +1,31 @@
+<!--hr/templates/hr/recruitment_list.html-->
+
+{% extends "hr/base.html" %}
+
+{% block content %}
+    <h1>Recruitment List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Position</th>
+                <th>Status</th>
+                <th>Date Posted</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recruitment in object_list %}
+            <tr>
+                <td>{{ recruitment.id }}</td>
+                <td>{{ recruitment.position }}</td>
+                <td>{{ recruitment.status }}</td>
+                <td>{{ recruitment.date_posted }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No recruitments available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,42 @@
+<!--hr/templates/hr/leave_tracker.html-->
+
+{% extends 'hr/base.html' %}
+
+{% block title %}Leave Tracker{% endblock %}
+
+{% block content %}
+    <h2>Leave Tracker</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Employee/Student</th>
+                <th>Leave Type</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Reason</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in leave_requests %}
+                <tr>
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.user }}</td>
+                    <td>{{ request.leave_type }}</td>
+                    <td>{{ request.start_date }}</td>
+                    <td>{{ request.end_date }}</td>
+                    <td>{{ request.status }}</td>
+                    <td>{{ request.reason }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7">No leave requests found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'general_settings' %}">Back to General Settings</a>
+{% endblock %}

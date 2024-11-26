@@ -1,0 +1,49 @@
+/* sidebar.css */
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #343a40;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 60px; /* Adjust based on your navbar height */
+    z-index: 9999; /* Ensure sidebar stays above other content */
+    transition: width 0.3s; /* Smooth transition */
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background-color: #575d63;
+}
+
+/* Style for icons */
+.sidebar a i {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+/* Responsive sidebar for smaller screens */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px; /* Adjust width for smaller screens */
+    }
+}
+
+.sidebar.collapsed {
+    width: 80px; /* Collapsed width */
+}
+
+.sidebar.collapsed a {
+    text-align: center; /* Centers text when collapsed */
+}
+
+.sidebar.collapsed a i {
+    margin-right: 0; /* Remove space between icon and text */
+}

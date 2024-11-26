@@ -1,0 +1,13 @@
+<!-- hr/templates/hr/home.html -->
+
+{% extends 'hr/base.html' %}  <!-- Extend the base template -->
+{% load static %}  <!-- Load static template tag library -->
+
+{% block title %}Home{% endblock %}  <!-- Set the title for this page -->
+
+{% block content %}
+    <h1>Welcome to the HR Management System</h1>
+    <div class="mt-3">
+        <a href="{% url 'dashboard' %}" class="btn btn-primary">Go to Dashboard</a>  <!-- Styled button -->
+    </div>
+{% endblock %}

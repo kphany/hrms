@@ -1,0 +1,31 @@
+<!-- D:\Projects\hrms\hr\templates\hr\employee_update.html -->
+{% extends 'hr/base.html' %}
+
+{% block title %}Update Employee{% endblock %}
+
+{% block content %}
+<h2>Update Employee: {{ employee.name }}</h2>
+
+<form method="POST" action="{% url 'employee_update' employee.id %}">
+    {% csrf_token %}
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ employee.name }}" required>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ employee.email }}" required>
+    </div>
+    <div>
+        <label for="position">Position:</label>
+        <input type="text" id="position" name="position" value="{{ employee.position }}" required>
+    </div>
+    <div>
+        <label for="department">Department:</label>
+        <input type="text" id="department" name="department" value="{{ employee.department }}" required>
+    </div>
+    <button type="submit">Update Employee</button>
+</form>
+
+<a href="{% url 'employee_list' %}">Back to Employee List</a>
+{% endblock %}

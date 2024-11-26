@@ -1,0 +1,17 @@
+<!-- add_department.html -->
+
+{% extends 'hr/base.html' %}
+
+{% block title %}Add Department{% endblock %}
+
+{% block content %}
+    <h2>Add Department</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Render form fields -->
+        <button type="submit">Add Department</button>
+    </form>
+    
+    <a href="{% url 'list_departments' %}">Back to Departments</a>
+{% endblock %}

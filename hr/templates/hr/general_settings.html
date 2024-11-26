@@ -1,0 +1,32 @@
+<!-- hr/templates/hr/general_settings.html -->
+
+{% extends 'hr/base.html' %}
+
+{% block title %}
+    General Settings
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>General Settings</h2>
+        <form method="POST" action="{% url 'save_general_settings' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="setting1" class="form-label">Setting 1</label>
+                <input type="text" class="form-control" id="setting1" name="setting1" value="{{ settings.setting1 }}">
+            </div>
+            <div class="mb-3">
+                <label for="setting2" class="form-label">Setting 2</label>
+                <input type="text" class="form-control" id="setting2" name="setting2" value="{{ settings.setting2 }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Settings</button>
+        </form>
+        {% if messages %}
+            <div class="alert alert-info">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

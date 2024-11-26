@@ -1,0 +1,40 @@
+<!--hr/templates/hr/dashboard.html-->
+
+{% extends 'hr/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Dashboard</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Employees</h5>
+                    <p class="card-text">{{ total_employees }}</p>
+                    <a href="{% url 'employee_list' %}" class="btn btn-primary">View Employees</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Leave Requests</h5>
+                    <p class="card-text">{{ pending_leaves }}</p>
+                    <a href="{% url 'leave_request' %}" class="btn btn-primary">View Requests</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Recent Announcements</h5>
+                    <p class="card-text">{{ recent_announcements|join:", " }}</p>
+                    <a href="{% url 'announcement_list' %}" class="btn btn-primary">View Announcements</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

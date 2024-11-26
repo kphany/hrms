@@ -1,0 +1,7 @@
+<h1>Delete Appraisal</h1>
+<p>Are you sure you want to delete the appraisal for {{ appraisal.employee.user.username }}?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+</form>
+<a href="{% url 'appraisal_list' %}">Cancel</a>

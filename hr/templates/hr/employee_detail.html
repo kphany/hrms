@@ -1,0 +1,47 @@
+<!--hr/templates/hr/employee_detail.html-->
+
+{% extends 'hr/base.html' %}
+
+{% load static %} <!-- Add this line to load the static tag -->
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Profile Picture -->
+            {% if employee.profile_picture %}
+                <img src="{{ employee.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail">
+            {% else %}
+                <img src="{% static 'images/placeholder.png' %}" alt="Default Profile Picture" class="img-thumbnail">
+            {% endif %}
+
+        </div>
+
+        <div class="col-md-9">
+            <!-- Employee Details -->
+            <h2>{{ employee.first_name }} {{ employee.last_name }}</h2>
+            <p><strong>Email:</strong> {{ employee.email }}</p>
+            <p><strong>Phone:</strong> {{ employee.phone }}</p>
+            <p><strong>Department:</strong> {{ employee.department.name }}</p>
+            <p><strong>Job Title:</strong> {{ employee.job_title }}</p>
+            <p><strong>Date Joined:</strong> {{ employee.date_joined }}</p>
+
+            <!-- Optional: Resume Link -->
+            {% if employee.resume %}
+                <p><strong>Resume:</strong> <a href="{{ employee.resume.url }}" class="btn btn-info">Download Resume</a></p>
+            {% else %}
+                <p><strong>Resume:</strong> Not Available</p>
+            {% endif %}
+
+            <!-- Buttons for Edit and Delete -->
+            <a href="{% url 'employee_edit' employee.id %}" class="btn btn-primary">Edit</a>
+            <form action="{% url 'employee_delete' employee.id %}" method="post" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this employee?');">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <a href="{% url 'employee_list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

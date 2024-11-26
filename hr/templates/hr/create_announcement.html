@@ -1,0 +1,20 @@
+<!-- hr/templates/hr/create_announcement.html -->
+
+{% extends 'hr/base.html' %}  <!-- Extend the base template -->
+{% load static %}  <!-- Load static template tag library -->
+
+{% block title %}Create Announcement{% endblock %}  <!-- Set the title for this page -->
+
+{% block content %}
+    <h1>Create Announcement</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-primary">Create Announcement</button>
+    </form>
+    <div class="mt-3">
+        <a href="{% url 'announcement_list' %}" class="btn btn-secondary">Back to Announcements</a>
+    </div>
+{% endblock %}
